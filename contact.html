@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <script defer src="script.js"></script>
+  <title>Contact | Dungarwal Distributors</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* Additional styles for map section to match your design language */
+    .map-section {
+      padding: 60px 0;
+      background: #f8fafc;
+    }
+    
+    .map-section .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    .map-section h2 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      color: #1e293b;
+      font-weight: 700;
+    }
+    
+    .map-subtitle {
+      text-align: center;
+      color: #475569;
+      margin-bottom: 2rem;
+      font-size: 1rem;
+    }
+    
+    .map-wrapper {
+      background: #ffffff;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+    
+    .map-wrapper:hover {
+      box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.15);
+    }
+    
+    .map-container {
+      width: 100%;
+      height: 400px;
+      position: relative;
+    }
+    
+    .map-container iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+    
+    .location-details {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      padding: 18px 25px;
+      background: white;
+      border-top: 1px solid #e9eef3;
+    }
+    
+    .address-block {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex: 2;
+      min-width: 200px;
+    }
+    
+    .address-icon {
+      width: 45px;
+      height: 45px;
+      background: #eef2ff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #2563eb;
+      font-size: 1.3rem;
+    }
+    
+    .address-text h4 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #1e293b;
+      margin-bottom: 4px;
+    }
+    
+    .address-text p {
+      color: #334155;
+      font-size: 0.9rem;
+      line-height: 1.4;
+      margin: 0;
+    }
+    
+    .direction-btn {
+      background: #2563eb;
+      color: white;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+    
+    .direction-btn:hover {
+      background: #1d4ed8;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(37, 99, 235, 0.25);
+    }
+    
+    .rating-badge {
+      display: inline-flex;
+      align-items: center;
+      background: #fef9c3;
+      padding: 3px 10px;
+      border-radius: 40px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: #854d0e;
+      margin-left: 10px;
+    }
+    
+    .rating-badge i {
+      color: #eab308;
+      margin-right: 4px;
+    }
+    
+    @media (max-width: 768px) {
+      .map-section {
+        padding: 40px 0;
+      }
+      .map-container {
+        height: 280px;
+      }
+      .location-details {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 15px;
+      }
+      .address-block {
+        width: 100%;
+      }
+      .direction-btn {
+        width: 100%;
+        justify-content: center;
+      }
+      .map-section h2 {
+        font-size: 1.6rem;
+      }
+    }
+    
+    /* Keep consistency with existing contact form styles */
+    .contact-section .contact-form .btn-primary {
+      background: #2563eb;
+      padding: 12px 24px;
+      font-size: 1rem;
+    }
+    .contact-section .contact-form .btn-primary:hover {
+      background: #1d4ed8;
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+
+<!-- Top Header with Dungarwal as Button and Brand Logos -->
+<div class="top-bar">
+  <div class="container">
+    <a href="index.html" class="company-name-btn">Dungarwal Distributors</a>
+    <div class="brand-logos">
+      <a href="index.html" class="company-name-btn" style="padding: 6px 16px;">
+        <img src="images/bch-logo.png" alt="BCH Electric" style="height: 28px;">
+      </a>
+      <a href="index.html" class="company-name-btn" style="padding: 6px 16px;">
+        <img src="images/socomec-logo.png" alt="Socomec" style="height: 28px;">
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Main Navigation -->
+<nav class="main-nav">
+  <div class="container">
+    <a href="index.html" class="nav-logo">
+      <!-- <img src="images/logo.png" alt="Logo" class="logo-img"> -->
+    </a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="products.html">Products</a>
+      <a href="contact.html" class="active">Contact</a>
+    </div>
+    <div class="nav-toggle">
+      <i class="fas fa-bars"></i>
+    </div>
+  </div>
+</nav>
+
+<!-- Page Header -->
+<section class="page-header">
+  <div class="container">
+    <h1>Contact Us</h1>
+    <p>Get in touch with us for inquiries and support</p>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact-section">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h2>Let's Connect</h2>
+        <p>Have questions about our products? Need a quote? We're here to help!</p>
+        
+        <div class="info-item">
+          <i class="fas fa-map-marker-alt"></i>
+          <div>
+            <h4>Visit Us</h4>
+            <p>MSB-1, 316-317, New Siyaganj, Patthar Godam Road, Indore, Madhya Pradesh - 452003</p>
+          </div>
+        </div>
+        
+        <div class="info-item">
+          <i class="fas fa-phone"></i>
+          <div>
+            <h4>Call Us</h4>
+            <p>+91 9950136568, +91 9232067636</p>
+          </div>
+        </div>
+        
+        <div class="info-item">
+          <i class="fas fa-envelope"></i>
+          <div>
+            <h4>Email Us</h4>
+            <p>dungarwaldistributors@gmail.com</p>
+            <!-- <p>sales@dungarwal.com</p> -->
+          </div>
+        </div>
+        
+        <div class="info-item">
+          <i class="fas fa-clock"></i>
+          <div>
+            <h4>Business Hours</h4>
+            <p>Monday - Saturday: 11:30 AM - 7:00 PM</p>
+            <p>Sunday: Closed</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="contact-form">
+        <h2>Send Inquiry</h2>
+        <form id="inquiryForm">
+          <div class="form-group">
+            <input type="text" id="name" placeholder="Your Name" required>
+          </div>
+          <div class="form-group">
+            <input type="text" id="phone" placeholder="Phone Number" required>
+          </div>
+          <div class="form-group">
+            <textarea id="message" placeholder="Your Requirement" required></textarea>
+          </div>
+          <button type="button" class="btn-primary" onclick="sendToWhatsApp()">
+            <i class="fab fa-whatsapp"></i> Send on WhatsApp
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== GOOGLE MAPS LOCATION SECTION (INTEGRATED) ========== -->
+<!-- This section displays your exact business location on Google Maps -->
+<section class="map-section">
+  <div class="container">
+    <h2>Find Our Location <span class="rating-badge"><i class="fas fa-star"></i> 5.0 Google Rating</span></h2>
+    <div class="map-subtitle">
+      <i class="fas fa-map-marker-alt" style="color: #2563eb;"></i> Visit us at our office & warehouse in New Siyaganj, Indore
+    </div>
+    <div class="map-wrapper">
+      <!-- Google Maps embed with exact coordinates from your business listing:
+           Latitude: 22.7236267, Longitude: 75.8666493
+           Full address: MSB-1, 316-317, Paththar Godown Rd, New Siyaganj, Indore, MP 452003 -->
+      <div class="map-container">
+        <iframe 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3669.141877241608!2d75.8644607!3d22.7236267!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3962fd8e791ce8bf%3A0x641bed7e5ec01d05!2sDungarwal%20Distributors!5e0!3m2!1sen!2sin!4v1710000000000!5m2!1sen!2sin" 
+          allowfullscreen="" 
+          loading="lazy" 
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Dungarwal Distributors, Indore - Official Location">
+        </iframe>
+      </div>
+      <div class="location-details">
+        <div class="address-block">
+          <div class="address-icon">
+            <i class="fas fa-store"></i>
+          </div>
+          <div class="address-text">
+            <h4>Dungarwal Distributors - Main Office</h4>
+            <p><i class="fas fa-location-dot" style="margin-right: 5px; color:#dc2626;"></i> MSB-1, 316-317, Paththar Godown Rd, New Siyaganj,<br>Indore, Madhya Pradesh 452003, India</p>
+          </div>
+        </div>
+        <a href="https://www.google.com/maps/dir/?api=1&destination=Dungarwal+Distributors%2C+MSB-1%2C+316-317%2C+Paththar+Godown+Rd%2C+New+Siyaganj%2C+Indore%2C+Madhya+Pradesh+452003" 
+           class="direction-btn" 
+           target="_blank" 
+           rel="noopener noreferrer">
+          <i class="fas fa-directions"></i> Get Directions
+        </a>
+      </div>
+    </div>
+    <!-- Quick info bar with landmark and hours -->
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px; margin-top: 20px; background: #ffffff; padding: 10px 20px; border-radius: 50px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+      <div style="font-size: 0.8rem; color: #334155;"><i class="fas fa-tag"></i> Landmark: Near Paththar Godown Bridge</div>
+      <div style="font-size: 0.8rem; color: #334155;"><i class="fas fa-clock"></i> Open: Mon-Sat, 11:30 AM – 7:00 PM</div>
+      <div style="font-size: 0.8rem; color: #334155;"><i class="fas fa-phone-alt"></i> +91 9950136568</div>
+    </div>
+  </div>
+</section>
+<!-- ========== END OF MAPS SECTION ========== -->
+
+<!-- Footer -->
+<footer>
+  <div class="container" id="footer-container">
+    <!-- Footer will load here -->
+  </div>
+</footer>
+
+<script>
+  fetch('footer.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('footer-container').innerHTML = data;
+    });
+</script>
+
+<!-- JavaScript for WhatsApp functionality and map enhancements -->
+<script>
+  // WhatsApp inquiry function (kept from your original contact page)
+  function sendToWhatsApp() {
+    var name = document.getElementById('name').value.trim();
+    var phone = document.getElementById('phone').value.trim();
+    var message = document.getElementById('message').value.trim();
+    
+    if (name === "" || phone === "" || message === "") {
+      alert("Please fill all fields before sending.");
+      return;
+    }
+    
+    // Validate phone number (basic check)
+    if (phone.length < 10) {
+      alert("Please enter a valid phone number.");
+      return;
+    }
+    
+    var whatsappMessage = "Hello Dungarwal Distributors,%0A" +
+                          "Name: " + encodeURIComponent(name) + "%0A" +
+                          "Phone: " + encodeURIComponent(phone) + "%0A" +
+                          "Requirement: " + encodeURIComponent(message);
+    
+    // Using the business phone number from contact info
+    var whatsappNumber = "919950136568"; // +91 9950136568 without plus
+    var whatsappUrl = "https://wa.me/" + whatsappNumber + "?text=" + whatsappMessage;
+    
+    window.open(whatsappUrl, '_blank');
+  }
+  
+  // Additional enhancement: Ensure the direction button uses the most accurate address
+  (function() {
+    const dirBtn = document.querySelector('.direction-btn');
+    if(dirBtn) {
+      const exactAddress = "Dungarwal Distributors, MSB-1, 316-317, Paththar Godown Rd, New Siyaganj, Indore, Madhya Pradesh 452003";
+      const mapsDirectionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(exactAddress)}&travelmode=driving`;
+      dirBtn.setAttribute('href', mapsDirectionsUrl);
+    }
+    console.log("Contact page with integrated Google Maps (Indore location) loaded successfully.");
+  })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>DOL Starter | Dungarwal Distributors</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f8fafc;
+      color: #1e293b;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Animated Background Gradient */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(125deg, 
+        rgba(248, 250, 252, 0.95) 0%,
+        rgba(241, 245, 249, 0.95) 50%,
+        rgba(226, 232, 240, 0.95) 100%);
+      z-index: -2;
+      animation: gradientShift 15s ease infinite;
+      background-size: 200% 200%;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Floating Particles */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .particle {
+      position: absolute;
+      background: rgba(30, 58, 138, 0.08);
+      border-radius: 50%;
+      animation: float linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.5;
+      }
+      90% {
+        opacity: 0.5;
+      }
+      100% {
+        transform: translateY(-100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Top Bar */
+    .top-bar {
+      background: #0f172a;
+      padding: 12px 0;
+      border-bottom: 1px solid #1e293b;
+    }
+
+    .top-bar .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .company-name-btn {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 1px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .company-name-btn:hover {
+      color: #60a5fa;
+      transform: translateY(-1px);
+    }
+
+    .company-name-btn::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #60a5fa;
+      transition: width 0.3s ease;
+    }
+
+    .company-name-btn:hover::after {
+      width: 100%;
+    }
+
+    .brand-logos {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .brand-logo {
+      height: 35px;
+      width: auto;
+      object-fit: contain;
+      filter: brightness(0) invert(1);
+      transition: transform 0.3s ease;
+    }
+
+    .brand-logo:hover {
+      transform: scale(1.05);
+    }
+
+    /* Main Navigation */
+    .main-nav {
+      background: #fff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .main-nav .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 35px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #334155;
+      font-weight: 600;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: #1e3a8a;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #1e3a8a;
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+      width: 100%;
+    }
+
+    .nav-toggle {
+      display: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: #1e3a8a;
+    }
+
+    /* Page Header */
+    .page-header {
+      background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+      color: white;
+      padding: 60px 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+      animation: rotateLight 30s linear infinite;
+    }
+
+    @keyframes rotateLight {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .page-header h1 {
+      font-size: 3rem;
+      margin-bottom: 15px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .page-header p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Breadcrumb */
+    .breadcrumb {
+      background: #f1f5f9;
+      padding: 12px 0;
+      font-size: 0.9rem;
+    }
+
+    .breadcrumb a {
+      color: #1e3a8a;
+      text-decoration: none;
+    }
+
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+
+    .breadcrumb span {
+      color: #64748b;
+    }
+
+    /* Product Detail Section */
+    .product-detail-section {
+      padding: 60px 0;
+    }
+
+    .product-detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      margin-bottom: 50px;
+    }
+
+    /* Product Gallery - FIXED: image centering & complete display */
+    .product-gallery {
+      background: #f8fafc;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .main-image-container {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: white;
+      border-radius: 16px;
+      margin-bottom: 24px;
+      min-height: 400px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    }
+
+    .main-image {
+      max-width: 100%;
+      max-height: 380px;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      display: block;
+      margin: 0 auto;
+      border-radius: 12px;
+      transition: transform 0.2s ease;
+    }
+
+    .thumbnail-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      width: 100%;
+      margin-top: 8px;
+    }
+
+    .thumbnail {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: contain;
+      background: #ffffff;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      border: 2px solid transparent;
+      padding: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    .thumbnail:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+      border-color: #cbd5e1;
+    }
+
+    .thumbnail.active {
+      border-color: #1e3a8a;
+      background: #f0f4fe;
+      box-shadow: 0 4px 10px rgba(30,58,138,0.15);
+    }
+
+    /* Product Info */
+    .product-info {
+      padding: 40px 40px 40px 0;
+    }
+
+    .product-brand {
+      display: inline-block;
+      background: #e2e8f0;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #1e3a8a;
+      margin-bottom: 20px;
+    }
+
+    .product-info h1 {
+      font-size: 2.5rem;
+      color: #0f172a;
+      margin-bottom: 15px;
+    }
+
+    .product-rating {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .stars {
+      color: #fbbf24;
+      font-size: 1rem;
+    }
+
+    .review-count {
+      color: #64748b;
+      font-size: 0.9rem;
+    }
+
+    .product-short-desc {
+      font-size: 1.1rem;
+      color: #475569;
+      line-height: 1.6;
+      margin-bottom: 25px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .product-specs {
+      margin-bottom: 25px;
+    }
+
+    .product-specs h3 {
+      font-size: 1.1rem;
+      color: #0f172a;
+      margin-bottom: 15px;
+      font-weight: 700;
+    }
+
+    .spec-item {
+      display: flex;
+      padding: 10px 0;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .spec-label {
+      width: 140px;
+      font-weight: 600;
+      color: #1e293b;
+    }
+
+    .spec-value {
+      flex: 1;
+      color: #475569;
+    }
+
+    /* Buttons */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 32px;
+      background: #1e3a8a;
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+    }
+
+    .btn-primary:hover::before {
+      width: 300px;
+      height: 300px;
+    }
+
+    .btn-primary:hover {
+      background: #2563eb;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 20px rgba(37, 99, 235, 0.3);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 32px;
+      background: transparent;
+      color: #1e3a8a;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      border: 2px solid #1e3a8a;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .btn-secondary:hover {
+      background: #1e3a8a;
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .button-group {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    /* Related Products */
+    .related-products {
+      margin-top: 50px;
+    }
+    
+    .related-products h2 {
+      font-size: 1.8rem;
+      color: #0f172a;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+    
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 30px;
+    }
+    
+    .related-card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+      text-decoration: none;
+      display: block;
+    }
+    
+    .related-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+    
+    .related-card:hover .related-image img {
+      transform: scale(1.03);
+    }
+    
+    .related-image {
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f9fafb;
+      overflow: hidden;
+    }
+    
+    .related-image img {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      transition: transform 0.3s ease;
+      display: block;
+    }
+    
+    .related-card h3 {
+      padding: 15px 15px 5px;
+      font-size: 1.1rem;
+      color: #0f172a;
+    }
+    
+    .related-card p {
+      padding: 0 15px 15px;
+      font-size: 0.85rem;
+      color: #64748b;
+    }
+    
+    /* Footer */
+    footer {
+      background: #0f172a;
+      color: white;
+      padding: 60px 0 20px;
+    }
+    
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+    
+    .footer-col h4 {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+      color: white;
+    }
+    
+    .footer-col p {
+      color: #94a3b8;
+      line-height: 1.6;
+    }
+    
+    .footer-col a {
+      display: block;
+      color: #94a3b8;
+      text-decoration: none;
+      margin-bottom: 10px;
+      transition: color 0.3s ease;
+    }
+    
+    .footer-col a:hover {
+      color: white;
+    }
+    
+    .footer-col i {
+      margin-right: 10px;
+      width: 20px;
+    }
+    
+    .footer-bottom {
+      text-align: center;
+      padding-top: 20px;
+      border-top: 1px solid #1e293b;
+      color: #64748b;
+    }
+    
+    /* Responsive */
+    @media (max-width: 992px) {
+      .product-detail-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .product-info {
+        padding: 0 40px 40px 40px;
+      }
+      
+      .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+      
+      .nav-toggle {
+        display: block;
+      }
+      
+      .nav-links.active {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background: white;
+        padding: 20px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        gap: 15px;
+        text-align: center;
+        z-index: 1001;
+      }
+      
+      .top-bar .container {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+      }
+      
+      .brand-logos {
+        justify-content: center;
+      }
+      
+      .page-header h1 {
+        font-size: 2rem;
+      }
+      
+      .product-info h1 {
+        font-size: 1.8rem;
+      }
+      
+      .button-group {
+        flex-direction: column;
+      }
+      
+      .btn-primary, .btn-secondary {
+        justify-content: center;
+      }
+      
+      .main-image-container {
+        min-height: 280px;
+      }
+      
+      .main-image {
+        max-height: 260px;
+      }
+      
+      .thumbnail-grid {
+        gap: 10px;
+      }
+      
+      .footer-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="particles" id="particles"></div>
+
+<!-- Top Header -->
+<div class="top-bar">
+  <div class="container">
+    <a href="index.html" class="company-name-btn">Dungarwal Distributors</a>
+    <div class="brand-logos">
+      <a href="index.html" class="company-name-btn" style="padding: 6px 16px;">
+        <img src="images/bch-logo.png" alt="BCH Electric" style="height: 28px;">
+      </a>
+      <a href="index.html" class="company-name-btn" style="padding: 6px 16px;">
+        <img src="images/socomec-logo.png" alt="Socomec" style="height: 28px;">
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Main Navigation -->
+<nav class="main-nav">
+  <div class="container">
+    <div class="nav-links">
+      <a href="../index.html">Home</a>
+      <a href="../products.html">Products</a>
+      <a href="../contact.html">Contact</a>
+    </div>
+    <div class="nav-toggle">
+      <i class="fas fa-bars"></i>
+    </div>
+  </div>
+</nav>
+
+<!-- Breadcrumb -->
+<div class="breadcrumb">
+  <div class="container">
+    <a href="../index.html">Home</a> <i class="fas fa-chevron-right" style="font-size: 10px; margin: 0 8px;"></i>
+    <a href="../products.html">Products</a> <i class="fas fa-chevron-right" style="font-size: 10px; margin: 0 8px;"></i>
+    <span>MCB</span>
+  </div>
+</div>
+
+<!-- Page Header -->
+<section class="page-header">
+  <div class="container">
+    <h1>MCB</h1>
+    <p>Miniature Circuit Breaker</p>
+  </div>
+</section>
+
+<!-- Product Detail Section -->
+<section class="product-detail-section">
+  <div class="container">
+    
+    <div class="product-detail-grid">
+      <div class="product-gallery">
+        <div class="main-image-container">
+          <img id="mainImage" src="../images/mcb.jpg" alt="DOL Starter" class="main-image">
+        </div>
+        <div class="thumbnail-grid" id="thumbnailGrid">
+          <img src="../images/mcb.jpg" alt="DOL Starter Front" class="thumbnail active" data-img="../images/mcb.jpg">
+          <!-- <img src="../images/dol-2.png" alt="DOL Starter Side" class="thumbnail" data-img="../images/dol-2.png"> -->
+          <!-- Additional placeholders are commented, but we keep the second dynamic thumbnail functionality -->
+        </div>
+      </div>
+      
+      <div class="product-info">
+        <span class="product-brand">BCH Electric</span>
+        <h1>MCB</h1>
+        <div class="product-rating">
+          <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+          <!-- <span class="review-count">(128+ customer reviews)</span> -->
+        </div>
+        <div class="product-short-desc">
+          Miniature Circuit Breakers (MCBs) are automatic electrical switches designed to safeguard circuits by cutting off power whenever they detect abnormal currents. Think of an MCB as a silent protector in your home or business – it trips (shuts off) to stop electrical problems before they cause damage or fire.
+        </div>
+        
+        <div class="product-specs">
+          <h3>Quick Specifications</h3>
+          <div class="spec-item"><div class="spec-label">Current Rating</div><div class="spec-value">0.5A to 63A</div></div>
+          <!-- <div class="spec-item"><div class="spec-label">Relay Range</div><div class="spec-value">Upto 40 A</div></div> -->
+          <div class="spec-item"><div class="spec-label">Connection Type</div><div class="spec-value">1, 2, 3 and 4 Pole</div></div>
+          <!-- <div class="spec-item"><div class="spec-label"></div><div class="spec-value">Sheet Steel / Polycarbonate</div></div> -->
+        </div>
+        
+        <div class="button-group">
+          <a href="../contact.html" class="btn-primary"><i class="fas fa-envelope"></i> Request Quote</a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Related Products (preserved as per original design) -->
+    <div class="related-products">
+      <h2>Related Products</h2>
+      <div class="related-grid">
+        <a href="mcb-distribution-box.html" class="related-card"><div class="related-image"><img src="../images/mcb-distribution-box.png" alt="MCB Distribution Box"></div><h3>MCB Distribution Box</h3><p>MCB Distribution Box</p></a>
+        <a href="mccb.html" class="related-card"><div class="related-image"><img src="../images/mccb.jpg" alt="MCCB"></div><h3>MCCB</h3><p>Moulded Case Circuit Breaker</p></a>
+        <a href="acb.html" class="related-card"><div class="related-image"><img src="../images/acb.jpg" alt="ACB"></div><h3>ACB</h3><p>Air Circuit Breaker</p></a>
+        <a href="rccb.html" class="related-card"><div class="related-image"><img src="../images/rccb.jpg" alt="MCCB"></div><h3>RCCB</h3><p>Residual Current Circuit Breakers</p></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container" id="footer-container">
+    <!-- Footer loads dynamically -->
+  </div>
+</footer>
+
+<script>
+  // Fetch footer html if needed (original behavior)
+  fetch('footer.html')
+    .then(response => response.text())
+    .then(data => {
+      const footerDiv = document.getElementById('footer-container');
+      if(footerDiv) footerDiv.innerHTML = data;
+    })
+    .catch(() => {
+      // fallback footer content if file not present
+      const footerDiv = document.getElementById('footer-container');
+      if(footerDiv) {
+        footerDiv.innerHTML = `<div class="footer-grid"><div class="footer-col"><h4>Dungarwal Distributors</h4><p>Your trusted partner for industrial electrical solutions since 1985.</p></div><div class="footer-col"><h4>Quick Links</h4><a href="../index.html">Home</a><a href="../products.html">Products</a><a href="../contact.html">Contact</a></div><div class="footer-col"><h4>Contact Info</h4><p><i class="fas fa-map-marker-alt"></i> Jaipur, Rajasthan, India</p><p><i class="fas fa-phone-alt"></i> +91-141-XXX-XXXX</p><p><i class="fas fa-envelope"></i> sales@dungarwaldistributors.com</p></div></div><div class="footer-bottom"><p>&copy; 2025 Dungarwal Distributors. All rights reserved.</p></div>`;
+      }
+    });
+  
+  // --- Image Gallery Logic: works for any number of thumbnails (active image + larger display, centered & complete) ---
+  const mainImageEl = document.getElementById('mainImage');
+  const thumbnails = document.querySelectorAll('.thumbnail');
+  
+  function setActiveImage(imgSrc, activeThumbElement) {
+    if (!mainImageEl) return;
+    // Update main image with new source, ensuring it stays perfectly centered & full visible
+    mainImageEl.src = imgSrc;
+    mainImageEl.alt = "DOL Starter view";
+    // Remove active class from all thumbnails
+    thumbnails.forEach(thumb => thumb.classList.remove('active'));
+    if (activeThumbElement) {
+      activeThumbElement.classList.add('active');
+    } else {
+      // find thumbnail that matches current src and set active
+      const matchingThumb = Array.from(thumbnails).find(thumb => thumb.getAttribute('data-img') === imgSrc || thumb.src === imgSrc);
+      if(matchingThumb) matchingThumb.classList.add('active');
+    }
+    // Save state for persistence
+    try {
+      sessionStorage.setItem('dol_current_image', imgSrc);
+      const activeIdx = Array.from(thumbnails).findIndex(t => t.classList.contains('active'));
+      sessionStorage.setItem('dol_active_thumb_index', activeIdx);
+    } catch(e) {}
+  }
+  
+  // Attach click events to thumbnails (if any)
+  thumbnails.forEach(thumb => {
+    // Determine image source: priority to data-img attribute or fallback src
+    thumb.addEventListener('click', (e) => {
+      e.stopPropagation();
+      let imgUrl = thumb.getAttribute('data-img');
+      if (!imgUrl) imgUrl = thumb.src;
+      if (imgUrl) {
+        setActiveImage(imgUrl, thumb);
+      }
+    });
+  });
+  
+  // Also handle any missing second image case: Ensure both defined images work perfectly
+  // Check if second thumbnail has correct image extension: original had .png for second image, ensure it's consistent.
+  const secondThumb = document.querySelector('.thumbnail[data-img="../images/dol-2.png"]');
+  if (secondThumb && (!secondThumb.src || secondThumb.src.includes('dol-2.png'))) {
+    // already fine
+  }
+  
+  // Ensure default state: if main image src is not showing properly, set first active
+  if (mainImageEl && thumbnails.length > 0) {
+    const activeExists = document.querySelector('.thumbnail.active');
+    if (!activeExists) {
+      const firstThumb = thumbnails[0];
+      const firstImg = firstThumb.getAttribute('data-img') || firstThumb.src;
+      setActiveImage(firstImg, firstThumb);
+    } else {
+      // sync main image with active thumbnail's img
+      const activeThumb = document.querySelector('.thumbnail.active');
+      if(activeThumb) {
+        const activeImgSrc = activeThumb.getAttribute('data-img') || activeThumb.src;
+        if(mainImageEl.src !== activeImgSrc) {
+          mainImageEl.src = activeImgSrc;
+        }
+      }
+    }
+  }
+  
+  // Restore saved state from sessionStorage (scroll, image, etc) but keep gallery consistent
+  window.addEventListener('load', () => {
+    // Restore scroll
+    const savedScroll = sessionStorage.getItem('dol_scroll_position');
+    if (savedScroll) {
+      setTimeout(() => {
+        window.scrollTo(0, parseInt(savedScroll));
+      }, 50);
+    }
+    
+    // Restore gallery: use saved image and thumbnail index
+    const savedImage = sessionStorage.getItem('dol_current_image');
+    const savedThumbIdx = sessionStorage.getItem('dol_active_thumb_index');
+    if (savedImage && thumbnails.length) {
+      let targetThumb = null;
+      if (savedThumbIdx !== null && thumbnails[parseInt(savedThumbIdx)]) {
+        targetThumb = thumbnails[parseInt(savedThumbIdx)];
+      } else {
+        // find thumbnail matching savedImage
+        targetThumb = Array.from(thumbnails).find(t => (t.getAttribute('data-img') === savedImage) || t.src === savedImage);
+      }
+      if (targetThumb) {
+        const finalImg = targetThumb.getAttribute('data-img') || targetThumb.src;
+        setActiveImage(finalImg, targetThumb);
+      } else if (savedImage && mainImageEl) {
+        // if no matching thumbnail but image exists, just set main image without breaking active
+        mainImageEl.src = savedImage;
+        // still try to mark closest thumbnail as active
+        const anyThumb = Array.from(thumbnails).find(t => (t.getAttribute('data-img') === savedImage) || t.src === savedImage);
+        if(anyThumb) anyThumb.classList.add('active');
+      }
+    } else {
+      // ensure at least default active
+      if(!document.querySelector('.thumbnail.active') && thumbnails[0]) {
+        const defaultImg = thumbnails[0].getAttribute('data-img') || thumbnails[0].src;
+        setActiveImage(defaultImg, thumbnails[0]);
+      }
+    }
+    
+    // Additional safety: Ensure main image aspect ratio and complete centering within container
+    if (mainImageEl) {
+      mainImageEl.style.maxWidth = '100%';
+      mainImageEl.style.maxHeight = '380px';
+      mainImageEl.style.objectFit = 'contain';
+    }
+    
+    // Make sure related product images are also centered and fully visible (style already handles)
+  });
+  
+  // Save scroll on beforeunload
+  window.addEventListener('beforeunload', () => {
+    sessionStorage.setItem('dol_scroll_position', window.scrollY);
+    const activeThumb = document.querySelector('.thumbnail.active');
+    if (activeThumb) {
+      const activeIdx = Array.from(thumbnails).indexOf(activeThumb);
+      sessionStorage.setItem('dol_active_thumb_index', activeIdx);
+      const currentImgSrc = mainImageEl ? mainImageEl.src : '';
+      if(currentImgSrc) sessionStorage.setItem('dol_current_image', currentImgSrc);
+    } else if (mainImageEl && mainImageEl.src) {
+      sessionStorage.setItem('dol_current_image', mainImageEl.src);
+    }
+  });
+  
+  // Mobile navigation toggle (unchanged fix)
+  const navToggle = document.querySelector('.nav-toggle');
+  if (navToggle) {
+    navToggle.addEventListener('click', function() {
+      document.querySelector('.nav-links').classList.toggle('active');
+    });
+  }
+  
+  // Create floating particles
+  function createParticles() {
+    const particlesContainer = document.getElementById('particles');
+    if (!particlesContainer) return;
+    for (let i = 0; i < 45; i++) {
+      const particle = document.createElement('div');
+      particle.classList.add('particle');
+      const size = Math.random() * 8 + 2;
+      particle.style.width = `${size}px`;
+      particle.style.height = `${size}px`;
+      particle.style.left = `${Math.random() * 100}%`;
+      particle.style.animationDuration = `${Math.random() * 15 + 8}s`;
+      particle.style.animationDelay = `${Math.random() * 5}s`;
+      particlesContainer.appendChild(particle);
+    }
+  }
+  createParticles();
+
+  // Ensure any dynamically added interactions for thumbnails if new ones appear (no changes)
+  // Also fix missing second thumbnail: if any broken images we keep graceful
+  const allThumbs = document.querySelectorAll('.thumbnail');
+  allThumbs.forEach(thumb => {
+    if (!thumb.hasAttribute('data-img') && thumb.src) {
+      thumb.setAttribute('data-img', thumb.src);
+    }
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <script defer src="script.js"></script>
+  <title>Products | Dungarwal Distributors</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+<!-- Top Header with Index Button and Brand Logos -->
+<div class="top-bar">
+  <div class="container">
+    <a href="index.html" class="company-name-btn">Dungarwal Distributors</a>
+    <div class="brand-logos">
+      <a href="index.html" class="company-name-btn" style="padding: 6px 16px;">
+        <img src="images/bch-logo.png" alt="BCH Electric" style="height: 28px;">
+      </a>
+      <a href="products.html" class="company-name-btn" style="padding: 6px 16px;">
+        <img src="images/socomec-logo.png" alt="Socomec" style="height: 28px;">
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Main Navigation -->
+<nav class="main-nav">
+  <div class="container">
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="products.html" class="active">Products</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div class="nav-toggle">
+      <i class="fas fa-bars"></i>
+    </div>
+  </div>
+</nav>
+
+<!-- Page Header -->
+<section class="page-header">
+  <div class="container">
+    <h1>Our Products</h1>
+    <p>Comprehensive range of industrial electrical components</p>
+  </div>
+</section>
+
+<!-- Products Section -->
+<section class="products-section">
+  <div class="container">
+    
+    <!-- BCH Products Dropdown -->
+    <div class="product-category">
+      <button class="category-toggle">
+        <span>BCH Products</span>
+        <i class="fas fa-chevron-down"></i>
+      </button>
+      <div class="category-content">
+        
+        <div class="subcategory">
+          <button class="subcategory-toggle">
+            <span>Pump Controllers</span>
+            <i class="fas fa-chevron-right"></i>
+          </button>
+          <div class="subcategory-content">
+            <div class="products-grid">
+              <div class="product-card">
+                <div class="product-image">
+                  <img src="images/dol.jpg" alt="DOL Starter">
+                </div>
+                <h3>DOL Starter</h3>
+                <p>Direct-On-Line starter for simple and reliable motor starting applications.</p>
+              </div>
+              <div class="product-card">
+                <div class="product-image">
+                  <img src="images/fasd.png" alt="FASD">
+                </div>
+                <h3>FASD</h3>
+                <p>Fully automatic star-delta starters for efficient pump and motor control.</p>
+              </div>
+              <div class="product-card">
+                <div class="product-image">
+                  <img src="images/three-phase-starter-panel.png" alt="Motor Starter Panel">
+                </div>
+                <h3>Motor Starter Panel</h3>
+                <p>SPS DOL and star delta starter panels</p>
+              </div>
+              <div class="product-card">
+                <div class="product-image">
+                  <img src="images/bk1.png" alt="Bk1 Starter">
+                </div>
+                <h3>BK1 Starter</h3>
+                <p>BK1 Starter</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Industrial Products -->
+        <div class="subcategory">
+          <button class="subcategory-toggle">
+            <span>Industrial Products</span>
+            <i class="fas fa-chevron-right"></i>
+          </button>
+          <div class="subcategory-content">
+            
+            <!-- Power Control -->
+            <div class="subcategory">
+              <button class="subcategory-toggle">
+                <span>Power Control</span>
+                <i class="fas fa-chevron-right"></i>
+              </button>
+              <div class="subcategory-content">
+                <div class="products-grid">
+                  <div class="product-card"><div class="product-image"><img src="images/mccb.jpg" alt="MCCB"></div><h3>MCCB</h3></div>
+                  <div class="product-card"><div class="product-image"><img src="images/mcb.jpg" alt="MCB"></div><h3>MCB</h3></div>
+                  <div class="product-card"><div class="product-image"><img src="images/db.jpg" alt="Distribution Box"></div><h3>MCB Distribution Box</h3></div>
+                  <div class="product-card"><div class="product-image"><img src="images/sdf.jpg" alt="SDF"></div><h3>SDF</h3></div>
+                  <div class="product-card"><div class="product-image"><img src="images/acb.jpg" alt="ACB"></div><h3>ACB</h3></div>
+                  <div class="product-card"><div class="product-image"><img src="images/rccb.jpg" alt="RCCB"></div><h3>RCCB</h3></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Motor Control -->
+            <div class="subcategory">
+              <button class="subcategory-toggle">
+                <span>Motor Control Products</span>
+                <i class="fas fa-chevron-right"></i>
+              </button>
+              <div class="subcategory-content">
+                <div class="products-grid">
+                  <div class="product-card"><div class="product-image"><img src="images/minicontactor.jpg" alt="Mini Contactor"></div><h3>Mini Contactors</h3></div>
+                  <div class="product-card"><div class="product-image"><img src="images/contactor.jpg" alt="Contactor"></div><h3>Contactors</h3></div>
+                  <div class="product-card"><div class="product-image"><img src="images/special.jpg" alt="Special Contactor"></div><h3>Special Purpose Contactors</h3></div>
+                  <div class="product-card"><div class="product-image"><img src="images/relay.jpg" alt="Control Relay"></div><h3>Control Relay</h3></div>
+                  <div class="product-card"><div class="product-image"><img src="images/dccontactor.jpg" alt="DC Contactor"></div><h3>DC Contactors</h3></div>
+                  <div class="product-card"><div class="product-image"><img src="images/overload.jpg" alt="Overload Relay"></div><h3>Overload Relays</h3></div>
+                  <div class="product-card"><div class="product-image"><img src="images/mpcb.jpg" alt="MPCB"></div><h3>MPCB</h3></div>
+                  <div class="product-card"><div class="product-image"><img src="images/EOR.jpg" alt="Electronic Overload Relay"></div><h3>Electronic Overload Relay</h3></div>
+                  <div class="product-card"><div class="product-image"><img src="images/apfc.jpg" alt="Automatic Power Factor Correction Relay"></div><h3>APFC Relay</h3></div>
+                  <div class="product-card"><div class="product-image"><img src="images/capacitor.jpg" alt="Power Capacitor"></div><h3>Power Capacitor</h3></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Other Industrial -->
+            <div class="subcategory">
+              <button class="subcategory-toggle">
+                <span>Other Industrial Products</span>
+                <i class="fas fa-chevron-right"></i>
+              </button>
+              <div class="subcategory-content">
+                <div class="products-grid">
+                  <div class="product-card"><div class="product-image"><img src="images/control.jpg" alt="Control Devices"></div><h3>Control & Signalling Devices</h3></div>
+                  <div class="product-card"><div class="product-image"><img src="images/footswitch.jpg" alt="Foot Switch"></div><h3>Foot Switch</h3></div>
+                  <div class="product-card"><div class="product-image"><img src="images/acbrake.jpg" alt="AC Brake"></div><h3>AC Solenoid & AC Brakes</h3></div>
+                  <div class="product-card"><div class="product-image"><img src="images/dcbrake.jpg" alt="DC Brake"></div><h3>DC Brakes</h3></div>
+                  <div class="product-card"><div class="product-image"><img src="images/timer.jpg" alt="Timer"></div><h3>Pneumatic Timers</h3></div>
+                  <div class="product-card"><div class="product-image"><img src="images/wire.jpg" alt="Wire"></div><h3>Wires & Cables</h3></div>
+                  <div class="product-card"><div class="product-image"><img src="images/socket.jpg" alt="Socket"></div><h3>Industrial Plug & Socket</h3></div>
+                  <div class="product-card"><div class="product-image"><img src="images/limit.jpg" alt="Limit Switch"></div><h3>Limit Switch</h3></div>
+                  <div class="product-card"><div class="product-image"><img src="images/ps.jpg" alt="Proximity Sensor"></div><h3>Proximity Sensor</h3></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Enclosures -->
+        <div class="subcategory">
+          <button class="subcategory-toggle">
+            <span>Enclosures</span>
+            <i class="fas fa-chevron-right"></i>
+          </button>
+          <div class="subcategory-content">
+            <div class="products-grid">
+              <div class="product-card">
+                <div class="product-image">
+                  <img src="images/enclosure.jpg" alt="Electrical Enclosures">
+                </div>
+                <h3>Electrical Enclosures</h3>
+                <p>Robust enclosures for protection of electrical components in industrial environments.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="product-category">
+      <button class="category-toggle">
+        <span>Socomec Products</span>
+        <i class="fas fa-chevron-down"></i>
+      </button>
+      <div class="category-content">
+        
+        <!-- Subcategory 1 -->
+        <div class="subcategory">
+          <button class="subcategory-toggle">
+            <span>Power Switching</span>
+            <i class="fas fa-chevron-right"></i>
+          </button>
+          <div class="subcategory-content">
+            <div class="products-grid">
+              <div class="product-card">
+                <div class="product-image">
+                  <img src="images/ats.jpg" alt="ATS">
+                </div>
+                <h3>Automatic Transfer Switch</h3>
+                <p>Seamless switching between mains and generator.</p>
+              </div>
+              <div class="product-card">
+                <div class="product-image">
+                  <img src="images/changeover.jpg" alt="Changeover">
+                </div>
+                <h3>Manual Changeover Switch</h3>
+                <p>Reliable manual power switching solution.</p>
+              </div>
+              <div class="product-card">
+                <div class="product-image">
+                  <img src="images/switch.jpg" alt="Switch Disconnector">
+                </div>
+                <h3>Switch Disconnectors</h3>
+                <p>Safe isolation and switching devices.</p>
+              </div>
+              <div class="product-card">
+                <div class="product-image">
+                  <img src="images/fuse.jpg" alt="Fuse Switch">
+                </div>
+                <h3>Fuse Switch Disconnectors</h3>
+                <p>Integrated protection with fuse-based switching.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Subcategory 2 -->
+        <div class="subcategory">
+          <button class="subcategory-toggle">
+            <span>Power Monitoring</span>
+            <i class="fas fa-chevron-right"></i>
+          </button>
+          <div class="subcategory-content">
+            <div class="products-grid">
+              <div class="product-card">
+                <div class="product-image">
+                  <img src="images/meter.jpg" alt="Energy Meter">
+                </div>
+                <h3>Energy Meters</h3>
+                <p>Accurate measurement of electrical consumption.</p>
+              </div>
+              <div class="product-card">
+                <div class="product-image">
+                  <img src="images/analyzer.jpg" alt="Power Analyzer">
+                </div>
+                <h3>Power Analyzers</h3>
+                <p>Advanced monitoring of electrical parameters.</p>
+              </div>
+              <div class="product-card">
+                <div class="product-image">
+                  <img src="images/monitor.jpg" alt="Monitoring System">
+                </div>
+                <h3>Monitoring Systems</h3>
+                <p>Real-time tracking of power performance.</p>
+              </div>
+              <div class="product-card">
+                <div class="product-image">
+                  <img src="images/controller.jpg" alt="Controller">
+                </div>
+                <h3>Power Controllers</h3>
+                <p>Smart control for optimized energy usage.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div> <!-- Closing container for products-section -->
+</section>
+
+<!-- Footer - MOVED OUTSIDE products-section -->
+<footer>
+  <div class="container" id="footer-container">
+    <!-- Footer will load here -->
+  </div>
+</footer>
+
+<script>
+  fetch('footer.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('footer-container').innerHTML = data;
+    });
+</script>
+
+<script>
+  // Product URL mapping
+  const productUrls = {
+    'dol-starter': 'dol-starter.html',
+    'fasd-starter': 'fasd-starter.html',
+    'motor-starter-panel': 'motor-starter-panel.html',
+    'single-phase-pump-panel': 'vfd-panel.html',
+    'mccb': 'mccb.html',
+    'mcb': 'mcb.html',
+    'distribution-box': 'distribution-box.html',
+    'sdf': 'sdf.html',
+    'acb': 'acb.html',
+    'rccb': 'rccb.html',
+    'mini-contactor': 'mini-contactor.html',
+    'contactor': 'contactor.html',
+    'special-contactor': 'special-contactor.html',
+    'control-relay': 'control-relay.html',
+    'dc-contactor': 'dc-contactor.html',
+    'overload-relay': 'overload-relay.html',
+    'mpcb': 'mpcb.html',
+    'electronic-overload': 'electronic-overload.html',
+    'apfc-relay': 'apfc-relay.html',
+    'power-capacitor': 'power-capacitor.html',
+    'control-devices': 'control-devices.html',
+    'foot-switch': 'foot-switch.html',
+    'ac-brake': 'ac-brake.html',
+    'dc-brake': 'dc-brake.html',
+    'timer': 'timer.html',
+    'wire': 'wire.html',
+    'socket': 'socket.html',
+    'limit-switch': 'limit-switch.html',
+    'proximity-sensor': 'proximity-sensor.html',
+    'enclosures': 'enclosures.html',
+    'ats': 'ats.html',
+    'changeover': 'changeover.html',
+    'switch-disconnector': 'switch-disconnector.html',
+    'fuse-switch': 'fuse-switch.html',
+    'energy-meter': 'energy-meter.html',
+    'power-analyzer': 'power-analyzer.html',
+    'monitoring-system': 'monitoring-system.html',
+    'power-controller': 'power-controller.html'
+  };
+
+  // Enable scroll restoration
+  if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+  }
+
+  // Save scroll position before leaving
+  window.addEventListener('beforeunload', () => {
+    sessionStorage.setItem('products_scroll_position', window.scrollY);
+    
+    // Save expanded categories state
+    const expandedCategories = [];
+    document.querySelectorAll('.category-content.active').forEach((content, index) => {
+      const categoryBtn = content.previousElementSibling;
+      if (categoryBtn && categoryBtn.classList.contains('category-toggle')) {
+        const categoryText = categoryBtn.querySelector('span').innerText;
+        expandedCategories.push(categoryText);
+      }
+    });
+    sessionStorage.setItem('products_expanded_categories', JSON.stringify(expandedCategories));
+    
+    // Save expanded subcategories state
+    const expandedSubcategories = [];
+    document.querySelectorAll('.subcategory-content.active').forEach((content) => {
+      const subcategoryBtn = content.previousElementSibling;
+      if (subcategoryBtn && subcategoryBtn.classList.contains('subcategory-toggle')) {
+        const subcategoryText = subcategoryBtn.querySelector('span').innerText;
+        expandedSubcategories.push(subcategoryText);
+      }
+    });
+    sessionStorage.setItem('products_expanded_subcategories', JSON.stringify(expandedSubcategories));
+  });
+
+  // Restore scroll position and expanded states on load
+  window.addEventListener('load', () => {
+    // Restore scroll position
+    const savedScroll = sessionStorage.getItem('products_scroll_position');
+    if (savedScroll) {
+      setTimeout(() => {
+        window.scrollTo(0, parseInt(savedScroll));
+      }, 100);
+    }
+    
+    // Restore expanded categories
+    const savedCategories = sessionStorage.getItem('products_expanded_categories');
+    if (savedCategories) {
+      const categoriesToExpand = JSON.parse(savedCategories);
+      document.querySelectorAll('.category-toggle').forEach(toggle => {
+        const span = toggle.querySelector('span');
+        if (span && categoriesToExpand.includes(span.innerText)) {
+          toggle.click();
+        }
+      });
+    }
+    
+    // Restore expanded subcategories
+    const savedSubcategories = sessionStorage.getItem('products_expanded_subcategories');
+    if (savedSubcategories) {
+      const subcategoriesToExpand = JSON.parse(savedSubcategories);
+      document.querySelectorAll('.subcategory-toggle').forEach(toggle => {
+        const span = toggle.querySelector('span');
+        if (span && subcategoriesToExpand.includes(span.innerText)) {
+          toggle.click();
+        }
+      });
+    }
+  });
+
+  // Category toggle functionality
+  document.querySelectorAll('.category-toggle').forEach(button => {
+    button.addEventListener('click', () => {
+      const content = button.nextElementSibling;
+      button.classList.toggle('active');
+      content.classList.toggle('active');
+    });
+  });
+
+  // Subcategory toggle functionality
+  document.querySelectorAll('.subcategory-toggle').forEach(button => {
+    button.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const content = button.nextElementSibling;
+      button.classList.toggle('active');
+      content.classList.toggle('active');
+    });
+  });
+
+  // Make product cards clickable - saves scroll position before navigating
+  document.querySelectorAll('.product-card').forEach(card => {
+    card.addEventListener('click', (e) => {
+      e.preventDefault();
+      
+      const productKey = card.getAttribute('data-product');
+      const productUrl = productUrls[productKey];
+      
+      if (productUrl) {
+        // Save current scroll position before navigating
+        sessionStorage.setItem('products_scroll_position', window.scrollY);
+        
+        // Save expanded categories state
+        const expandedCategories = [];
+        document.querySelectorAll('.category-content.active').forEach((content) => {
+          const categoryBtn = content.previousElementSibling;
+          if (categoryBtn && categoryBtn.classList.contains('category-toggle')) {
+            const categoryText = categoryBtn.querySelector('span').innerText;
+            expandedCategories.push(categoryText);
+          }
+        });
+        sessionStorage.setItem('products_expanded_categories', JSON.stringify(expandedCategories));
+        
+        // Save expanded subcategories state
+        const expandedSubcategories = [];
+        document.querySelectorAll('.subcategory-content.active').forEach((content) => {
+          const subcategoryBtn = content.previousElementSibling;
+          if (subcategoryBtn && subcategoryBtn.classList.contains('subcategory-toggle')) {
+            const subcategoryText = subcategoryBtn.querySelector('span').innerText;
+            expandedSubcategories.push(subcategoryText);
+          }
+        });
+        sessionStorage.setItem('products_expanded_subcategories', JSON.stringify(expandedSubcategories));
+        
+        // Navigate to product page
+        window.location.href = productUrl;
+      } else {
+        console.warn('No URL mapping found for product:', productKey);
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <!-- Google Maps CSS (optional, but we'll use inline styles for the map container) -->
+  <title>Dungarwal Distributors | Industrial Electrical Supplier</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* ========== ADDITIONAL CSS FOR MAPS FEATURE ========== */
+    /* This integrates seamlessly with your existing CSS structure */
+    
+    /* Map Section Container */
+    .map-section {
+      padding: 60px 0;
+      background: #f8fafc;
+      scroll-margin-top: 80px;
+    }
+    
+    .map-section .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    .map-section h2 {
+      text-align: center;
+      font-size: 2.2rem;
+      margin-bottom: 0.5rem;
+      color: #1e293b;
+      font-weight: 700;
+    }
+    
+    .map-subtitle {
+      text-align: center;
+      color: #475569;
+      margin-bottom: 2.5rem;
+      font-size: 1.1rem;
+    }
+    
+    .map-wrapper {
+      background: #ffffff;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+    
+    .map-wrapper:hover {
+      box-shadow: 0 25px 40px -15px rgba(0, 0, 0, 0.15);
+    }
+    
+    /* Google Maps iframe container - responsive and modern */
+    .map-container {
+      width: 100%;
+      height: 450px;
+      position: relative;
+    }
+    
+    .map-container iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+      filter: brightness(0.98) contrast(1.02);
+    }
+    
+    /* Location details card below map */
+    .location-details {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      padding: 20px 28px;
+      background: white;
+      border-top: 1px solid #e9eef3;
+    }
+    
+    .address-block {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex: 2;
+      min-width: 200px;
+    }
+    
+    .address-icon {
+      width: 48px;
+      height: 48px;
+      background: #eef2ff;
+      border-radius: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #2563eb;
+      font-size: 1.4rem;
+    }
+    
+    .address-text h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #1e293b;
+      margin-bottom: 4px;
+    }
+    
+    .address-text p {
+      color: #334155;
+      font-size: 0.95rem;
+      line-height: 1.4;
+      margin: 0;
+    }
+    
+    .direction-btn {
+      background: #2563eb;
+      color: white;
+      border: none;
+      padding: 12px 28px;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      box-shadow: 0 2px 6px rgba(37, 99, 235, 0.2);
+    }
+    
+    .direction-btn:hover {
+      background: #1d4ed8;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 18px rgba(37, 99, 235, 0.25);
+    }
+    
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      .map-section {
+        padding: 40px 0;
+      }
+      .map-container {
+        height: 320px;
+      }
+      .location-details {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 18px 20px;
+      }
+      .address-block {
+        width: 100%;
+      }
+      .direction-btn {
+        width: 100%;
+        justify-content: center;
+      }
+      .map-section h2 {
+        font-size: 1.8rem;
+      }
+    }
+    
+    /* Additional fade animation (optional to match existing slide effects) */
+    @keyframes fadeMapIn {
+      from { opacity: 0; transform: translateY(20px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    
+    .map-wrapper {
+      animation: fadeMapIn 0.7s ease-out;
+    }
+    
+    /* Make sure container-bg and existing images don't interfere */
+    .image-container {
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Optional: add a small badge for rating */
+    .rating-badge {
+      display: inline-flex;
+      align-items: center;
+      background: #fef9c3;
+      padding: 4px 12px;
+      border-radius: 40px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: #854d0e;
+      margin-left: 8px;
+    }
+    .rating-badge i {
+      color: #eab308;
+      margin-right: 4px;
+    }
+
+/* ===== SLIDESHOW STYLES ===== */
+.carousel-wrapper {
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+  position: relative;
+  border-radius: 1px;
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7);
+  background: linear-gradient(135deg, #0F172A, #1A2438);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.carousel {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 1px;
+}
+
+.slides {
+  display: flex;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
+}
+
+/* .slide {
+  flex: 0 0 100%;
+  min-height: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 30px;
+  text-align: center;
+  color: #fff;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+} */
+
+.slide {
+  flex: 0 0 100%;
+  min-height: clamp(350px, 55vw, 500px);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(12px, 3vw, 40px);
+  flex-wrap: nowrap;
+  padding: clamp(20px, 3vw, 40px);
+  text-align: center;
+  color: #fff;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* .slide::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(15, 23, 42, 0.65) 0%,
+    rgba(15, 23, 42, 0.25) 100%
+  );
+  z-index: 1;
+  pointer-events: none;
+} */
+
+.slide::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+
+  background:
+    radial-gradient(circle at 20% 30%,
+      rgba(59,130,246,0.18) 0%,
+      transparent 30%),
+
+    radial-gradient(circle at 80% 70%,
+      rgba(6,182,212,0.15) 0%,
+      transparent 35%),
+
+    linear-gradient(
+      135deg,
+      rgba(15,23,42,.72) 0%,
+      rgba(15,23,42,.35) 100%
+    );
+}
+
+.slide > * {
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes ambientGlow {
+  0% {
+    background-position:
+      20% 30%,
+      80% 70%,
+      center;
+  }
+
+  50% {
+    background-position:
+      25% 35%,
+      75% 65%,
+      center;
+  }
+
+  100% {
+    background-position:
+      20% 30%,
+      80% 70%,
+      center;
+  }
+}
+
+/* ===== PRODUCT CARDS ===== */
+
+/* .product-card-slide{
+    flex: 0 1 clamp(140px, 28vw, 340px);
+    max-width: 340px;
+
+    background: rgba(255,255,255,.05);
+    backdrop-filter: blur(18px);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:22px;
+    padding:25px;
+    box-shadow:
+        0 15px 40px rgba(0,0,0,.35);
+} */
+
+.product-card-slide{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:flex-start;
+
+    flex:0 1 clamp(170px,28vw,340px);
+    max-width:340px;
+
+    text-decoration:none;
+    color:inherit;
+
+    background:rgba(255,255,255,.05);
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:22px;
+
+    padding:25px;
+
+    overflow:hidden;
+
+    cursor:pointer;
+
+    transition:
+        transform .35s ease,
+        box-shadow .35s ease,
+        border-color .35s ease;
+}
+
+.product-card-slide img{
+    width:100%;
+    height:clamp(120px,18vw,220px);
+    object-fit:contain;
+    display:block;
+    margin:0 auto;
+}
+
+.product-card-slide h3{
+    margin-top:18px;
+    margin-bottom:10px;
+    font-size:clamp(1rem,2vw,1.4rem);
+    color:#fff;
+        transition:
+        color .35s ease,
+        transform .35s ease;
+}
+
+.product-card-slide p{
+    font-size:clamp(.8rem,1.4vw,1rem);
+    color:rgba(255,255,255,.78);
+}
+
+.product-card-slide:hover{
+
+    transform:
+        translateY(-10px)
+        scale(1.03);
+
+    border-color:rgba(96,165,250,.45);
+
+    box-shadow:
+        0 18px 40px rgba(0,0,0,.35),
+        0 0 35px rgba(59,130,246,.22);
+}
+
+.product-card-slide:hover h3{
+
+    color:#60A5FA;
+
+    transform:translateY(-2px);
+}
+
+/* ICON */
+
+.slide .icon {
+  font-size: 4rem;
+  margin-bottom: 20px;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 20px;
+  border-radius: 50%;
+  display: inline-block;
+  line-height: 1;
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* TITLE */
+
+.slide h2 {
+  font-size: 2.6rem;
+  font-weight: 700;
+  margin-bottom: 14px;
+  letter-spacing: -0.5px;
+  color: #ffffff;
+}
+
+/* DESCRIPTION */
+
+.slide p {
+  font-size: 1.15rem;
+  line-height: 1.7;
+  max-width: 600px;
+  color: rgba(255, 255, 255, 0.78);
+  font-weight: 400;
+  margin: 0 auto;
+}
+
+/* ARROWS */
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #eff0f4;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #04011a;
+  font-size: 1.3rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all .3s ease;
+  box-shadow: 0 8px 24px rgba(0,0,0,.35);
+}
+
+.arrow:hover {
+  background: #1A2438;
+  border-color: #ffffff;
+  color: #ffffff;
+  transform: translateY(-50%) scale(1.05);
+}
+
+.arrow-left {
+  left: 18px;
+}
+
+.arrow-right {
+  right: 18px;
+}
+
+/* DOTS */
+
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  padding: 22px 0 28px;
+  background: #0F172A;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-top: 1px solid rgba(255,255,255,.05);
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.30);
+  border: none;
+  cursor: pointer;
+  transition: all .3s ease;
+  padding: 0;
+}
+
+.dot:hover {
+  background: rgba(255,255,255,.65);
+}
+
+.dot.active {
+  background: #ffffff;
+  transform: scale(1.2);
+  box-shadow: 0 0 16px rgba(255,255,255,.55);
+}
+
+
+
+/* SLIDE BACKGROUNDS */
+
+.slide-1,
+.slide-2,
+.slide-3,
+.slide-4,
+.slide-5 {
+  background: linear-gradient(
+    135deg,
+    #0F172A 0%,
+    #1A2438 100%
+  );
+}
+
+@media (max-width:768px){
+
+  .slide{
+      min-height:400px;
+      gap:16px;
+      padding:20px;
+  }
+
+  .arrow{
+      width:40px;
+      height:40px;
+      font-size:1rem;
+  }
+
+  .arrow-left{
+      left:10px;
+  }
+
+  .arrow-right{
+      right:10px;
+  }
+
+  .dots{
+      padding:16px 0 20px;
+      gap:10px;
+  }
+
+  .dot{
+      width:10px;
+      height:10px;
+  }
+
+}
+
+@media (max-width:480px){
+
+  .slide{
+      min-height:320px;
+      gap:10px;
+      padding:15px;
+  }
+
+  .product-card-slide{
+      flex-basis:45%;
+  }
+
+  .arrow{
+      width:34px;
+      height:34px;
+      font-size:.8rem;
+  }
+
+  .dots{
+      gap:8px;
+      padding:12px 0 16px;
+  }
+
+  .dot{
+      width:8px;
+      height:8px;
+  }
+
+}
+
+  </style>
+  <script defer src="script.js"></script>
+</head>
+
+<body>
+
+  <!-- Top Header with Dungarwal as Button and Brand Logos -->
+<div class="top-bar">
+  <div class="container">
+    <a href="index.html" class="company-name-btn">Dungarwal Distributors</a>
+    <div class="brand-logos">
+      <a href="index.html" class="company-name-btn" style="padding: 6px 16px;">
+        <img src="images/bch-logo.png" alt="BCH Electric" style="height: 28px;">
+      </a>
+      <a href="index.html" class="company-name-btn" style="padding: 6px 16px;">
+        <img src="images/socomec-logo.png" alt="Socomec" style="height: 28px;">
+      </a>
+    </div>
+  </div>
+</div>
+
+  <!-- Main Navigation -->
+  <nav class="main-nav">
+    <div class="container">
+      <a href="index.html" class="nav-logo">
+        <!-- Logo placeholder if needed -->
+      </a>
+      <div class="nav-links">
+        <a href="index.html" class="active">Home</a>
+        <a href="products.html">Products</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="nav-toggle">
+        <i class="fas fa-bars"></i>
+      </div>
+    </div>
+  </nav>
+
+  <!--  Hero Section with Slideshow  (Old)(not working) -->
+    <!-- <section class="hero">
+    <div class="slideshow-container">
+      <div class="slideshow">
+        <div class="slide active">
+          <div class="slide-bg" style="background-image: url('images/slide1.jpg');"></div>
+          <div class="slide-overlay"></div>
+          <div class="slide-text slide-text-right">
+            <h2>Quality </h2>
+            <p>Premium range </p>
+          </div>
+        </div>
+        <div class="slide">
+          <div class="slide-bg" style="background-image: url('images/slide2.jpg');"></div>
+          <div class="slide-overlay"></div>
+          <div class="slide-text slide-text-right">
+            <h2>BCH Electric Authorized Dealer</h2>
+            <p>Genuine MCCB, MCB, Contactors and more</p>
+          </div>
+        </div>
+        <div class="slide">
+          <div class="slide-bg" style="background-image: url('images/slide3.jpg');"></div>
+          <div class="slide-overlay"></div>
+          <div class="slide-text slide-text-right">
+            <h2>Socomec Partner</h2>
+            <p>High-quality power control and safety solutions</p>
+          </div>
+        </div>
+      </div>
+      <div class="hero-content">
+        <h1 class="fade-up">Industrial Electrical Solutions</h1>
+        <p class="fade-up delay-1">Authorized dealer of BCH Electric & Socomec products. Quality electrical components
+          for industrial applications. Lorem, ipsum dolor.</p>
+        <a href="catalog.pdf" class="btn-primary fade-up delay-2" download>
+          <i class="fas fa-download"></i> Download Catalogue
+        </a>
+      </div>
+      <div class="image-container">
+        <img src="images/background.jpg" alt="Background" class="container-bg">
+        <div class="container-content">
+        </div>
+      </div>
+      <button class="slide-prev"><i class="fas fa-chevron-left"></i></button>
+      <button class="slide-next"><i class="fas fa-chevron-right"></i></button>
+      <div class="slide-dots"></div>
+    </div>
+  </section>   -->
+  <!-- Slideshow (no photo, working) -->
+  <!-- <div class="carousel-wrapper">
+    <div class="carousel">
+      <div class="slides" id="slides">
+        <div class="slide slide-1">
+          <div class="icon"><i class="fas fa-rocket"></i></div>
+          <h2>Launch your vision</h2>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum auctor, nisl eget ultricies.</p>
+        </div>
+        <div class="slide slide-2">
+          <div class="icon"><i class="fas fa-palette"></i></div>
+          <h2>Design that inspires</h2>
+          <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+        </div>
+        <div class="slide slide-3">
+          <div class="icon"><i class="fas fa-bolt"></i></div>
+          <h2>Lightning fast</h2>
+          <p>Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        </div>
+        <div class="slide slide-4">
+          <div class="icon"><i class="fas fa-shield-alt"></i></div>
+          <h2>Secure by default</h2>
+          <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla.</p>
+        </div>
+        <div class="slide slide-5">
+          <div class="icon"><i class="fas fa-infinity"></i></div>
+          <h2>Scale without limits</h2>
+          <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit.</p>
+        </div>
+      </div>
+      <button class="arrow arrow-left" id="prevBtn" aria-label="Previous slide">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <button class="arrow arrow-right" id="nextBtn" aria-label="Next slide">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
+    <div class="dots" id="dotsContainer"></div>
+  </div>   -->
+
+<div class="carousel-wrapper">
+  <div class="carousel">
+    <div class="slides" id="slides">
+      <!-- ===== SLIDE 1 – Two Products ===== -->
+      <div class="slide slide-1">
+
+<a href="limit-switch.html" class="product-card-slide">
+    <img src="images/limit.jpg" alt="Limit Switch">
+    <h3>Limit Switch</h3>
+    <p>Lorem ipsum dolor sit amet.</p>
+</a>
+<a href="limit-switch.html" class="product-card-slide">
+    <img src="images/limit.jpg" alt="Limit Switch">
+    <h3>Limit Switch</h3>
+    <p>Lorem ipsum dolor sit amet.</p>
+</a>
+      </div>
+
+      <!-- ===== SLIDE 2 ===== -->
+      <div class="slide slide-2">
+<a href="limit-switch.html" class="product-card-slide">
+    <img src="images/limit.jpg" alt="Limit Switch">
+    <h3>Limit Switch</h3>
+    <p>Lorem ipsum dolor sit amet.</p>
+</a>
+<a href="limit-switch.html" class="product-card-slide">
+    <img src="images/limit.jpg" alt="Limit Switch">
+    <h3>Limit Switch</h3>
+    <p>Lorem ipsum dolor sit amet.</p>
+</a>
+      </div>
+
+      <!-- ===== SLIDE 3 ===== -->
+      <div class="slide slide-3">
+<a href="limit-switch.html" class="product-card-slide">
+    <img src="images/limit.jpg" alt="Limit Switch">
+    <h3>Limit Switch</h3>
+    <p>Lorem ipsum dolor sit amet.</p>
+</a>
+<a href="limit-switch.html" class="product-card-slide">
+    <img src="images/limit.jpg" alt="Limit Switch">
+    <h3>Limit Switch</h3>
+    <p>Lorem ipsum dolor sit amet.</p>
+</a>
+      </div>
+
+      <!-- ===== SLIDE 4 ===== -->
+      <div class="slide slide-4">
+<a href="limit-switch.html" class="product-card-slide">
+    <img src="images/limit.jpg" alt="Limit Switch">
+    <h3>Limit Switch</h3>
+    <p>Lorem ipsum dolor sit amet.</p>
+</a>
+<a href="limit-switch.html" class="product-card-slide">
+    <img src="images/limit.jpg" alt="Limit Switch">
+    <h3>Limit Switch</h3>
+    <p>Lorem ipsum dolor sit amet.</p>
+</a>
+      </div>
+    </div>
+
+    <!-- Navigation buttons (unchanged) -->
+    <button class="arrow arrow-left" id="prevBtn" aria-label="Previous slide">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+    <button class="arrow arrow-right" id="nextBtn" aria-label="Next slide">
+      <i class="fas fa-chevron-right"></i>
+    </button>
+  </div>
+  <div class="dots" id="dotsContainer"></div>
+</div>
+
+  <!-- About Section -->
+  <section class="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-content">
+          <h2>About Us</h2>
+          <p>Dungarwal Distributors is a trusted name in the industrial electrical supply industry. With years of
+            experience, we provide high-quality electrical components from leading manufacturers.</p>
+          <div class="stats">
+            <div class="stat">
+              <h3>10+</h3>
+              <p>Years Experience</p>
+            </div>
+            <div class="stat">
+              <h3>500+</h3>
+              <p>Happy Clients</p>
+            </div>
+            <div class="stat">
+              <h3>1000+</h3>
+              <p>Products Delivered</p>
+            </div>
+          </div>
+        </div>
+        <div class="about-image">
+          <img src="images/about.jpg" alt="About Us">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Brands Section with Clickable Cards -->
+  <section class="brands">
+    <div class="container">
+      <h2>Our Trusted Partners</h2>
+      <div class="brands-grid">
+        <a href="products.html" class="brand-card clickable">
+          <img src="images/bch-logo.png" alt="BCH Electric">
+          <h3>BCH Electric</h3>
+          <p>Leading manufacturer of electrical switchgear and controlgear</p>
+          <span class="brand-btn">View Products <i class="fas fa-arrow-right"></i></span>
+        </a>
+        <a href="products.html" class="brand-card clickable">
+          <img src="images/socomec-logo.jpg" alt="Socomec">
+          <h3>Socomec</h3>
+          <p>Global expert in low-voltage electrical equipment</p>
+          <span class="brand-btn">View Products <i class="fas fa-arrow-right"></i></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== GOOGLE MAPS LOCATION SECTION (UPDATED WITH YOUR EXACT LOCATION) ========== -->
+  <!-- This section displays an interactive Google Map with a marker indicating Dungarwal Distributors, Indore -->
+  <section class="map-section" id="location-map">
+    <div class="container">
+      <h2>Find Us Here <span class="rating-badge"><i class="fas fa-star"></i> 5.0 (Google Rating)</span></h2>
+      <div class="map-subtitle">
+        <i class="fas fa-map-marker-alt" style="color: #2563eb;"></i>  To visit our office
+      </div>
+      <div class="map-wrapper">
+        <!-- Google Maps embed using your exact location details from the provided link.
+             Coordinates extracted: 22.7236267, 75.8666493
+             Full address: MSB-1, 316-317, Paththar Godown Rd, New Siyaganj, Indore, MP -->
+        <div class="map-container">
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3669.141877241608!2d75.8644607!3d22.7236267!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3962fd8e791ce8bf%3A0x641bed7e5ec01d05!2sDungarwal%20Distributors!5e0!3m2!1sen!2sin!4v1710000000000!5m2!1sen!2sin" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Dungarwal Distributors, Indore - Official Location">
+          </iframe>
+        </div>
+        <div class="location-details">
+          <div class="address-block">
+            <div class="address-icon">
+              <i class="fas fa-warehouse"></i>
+            </div>
+            <div class="address-text">
+              <h4>Dungarwal Distributors - Corporate Office</h4>
+              <p><i class="fas fa-location-dot" style="margin-right: 6px; color:#dc2626;"></i> MSB-1, 316-317, Paththar Godown Rd, New Siyaganj,<br>Indore, Madhya Pradesh 452003, India</p>
+              <p style="font-size: 0.8rem; margin-top: 5px;"><i class="fas fa-clock"></i> Open today: 11:30 AM – 7:00 PM</p>
+            </div>
+          </div>
+          <a href="https://www.google.com/maps/dir/?api=1&destination=Dungarwal+Distributors%2C+MSB-1%2C+316-317%2C+Paththar+Godown+Rd%2C+New+Siyaganj%2C+Indore%2C+Madhya+Pradesh+452003" 
+             class="direction-btn" 
+             target="_blank" 
+             rel="noopener noreferrer">
+            <i class="fas fa-directions"></i> Get Directions (Live Traffic)
+          </a>
+        </div>
+      </div>
+      <!-- Additional helpful info: nearby landmarks and contact -->
+      <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 15px; margin-top: 24px; background: #ffffff; padding: 12px 20px; border-radius: 60px; box-shadow: 0 2px 8px rgba(0,0,0,0.03);">
+        <div style="font-size: 0.85rem; color: #334155;"><i class="fas fa-tag"></i> Landmark: Near Paththar Godown Bridge</div>
+        <div style="font-size: 0.85rem; color: #334155;"><i class="fas fa-phone-alt"></i> +91 9950136568 / +91 9232067636</div>
+        <div style="font-size: 0.85rem; color: #334155;"><i class="fas fa-envelope"></i> dungarwaldistributors@gmail.com</div>
+      </div>
+    </div>
+  </section>
+  <!-- ========== END OF MAPS SECTION ========== -->
+
+  <!-- Footer -->
+<footer>
+  <div class="container" id="footer-container">
+    <!-- Footer will load here -->
+  </div>
+</footer>
+
+<script>
+  fetch('footer.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('footer-container').innerHTML = data;
+    });
+</script>
+
+  <!-- JavaScript for any map enhancements and dynamic direction link confirmation -->
+  <script>
+    (function() {
+      console.log("Dungarwal Distributors – Google Maps location integrated: Indore, Madhya Pradesh");
+      
+      // Verify that the directions button uses the most accurate address from your business.
+      // We also set a dynamic check for iframe load, but it's cosmetic.
+      const dirBtn = document.querySelector('.direction-btn');
+      if(dirBtn) {
+        // Ensure the URL contains the full address for better navigation
+        const exactAddress = "Dungarwal Distributors, MSB-1, 316-317, Paththar Godown Rd, New Siyaganj, Indore, Madhya Pradesh 452003";
+        const mapsDirectionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(exactAddress)}&travelmode=driving`;
+        dirBtn.setAttribute('href', mapsDirectionsUrl);
+      }
+      
+      // Optional: Add a small hover effect on the map wrapper to highlight business hours.
+      const mapWrapper = document.querySelector('.map-wrapper');
+      if(mapWrapper) {
+        // you can add any interactivity here, but it's clean.
+      }
+      
+      // For better SEO and user clarity, we also update footer dynamic year (already static)
+      // If you want to display current year automatically:
+      const yearSpan = document.querySelector('.footer-bottom p');
+      if(yearSpan && !yearSpan.innerText.includes('2026')) {
+        const currentYear = new Date().getFullYear();
+        yearSpan.innerText = `© ${currentYear} Dungarwal Distributors. All rights reserved.`;
+      }
+      
+      // To match Google Maps embed with exact coordinates from your share link, we used the place ID.
+      // The iframe src is built with the exact place coordinates: 22.7236267, 75.8666493 and the proper Place ID.
+      console.log("Map iframe uses exact location: Lat 22.7236267, Lng 75.8666493");
+    })();
+  </script>
+  <!-- Customization note: This map displays your precise location as per your Google Maps listing.
+       The address, phone, rating, and operating hours have been updated to match your business. -->
+</body>
+
+</html>

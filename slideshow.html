@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Slideshow</title>
+
+    <!-- Google Fonts (clean sans) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,700&display=swap" rel="stylesheet" />
+
+    <!-- Font Awesome (for arrows & dots) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+    <style>
+        /* ----- reset & base ----- */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0b0a16;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        /* ----- carousel container ----- */
+        .carousel-wrapper {
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7);
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .carousel {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            border-radius: 28px;
+        }
+
+        .slides {
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            will-change: transform;
+        }
+
+        .slide {
+            flex: 0 0 100%;
+            min-height: 500px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 30px;
+            text-align: center;
+            color: #fff;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        /* gradient overlay for readability */
+        .slide::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(11, 10, 22, 0.65) 0%, rgba(11, 10, 22, 0.25) 100%);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .slide>* {
+            position: relative;
+            z-index: 2;
+        }
+
+        .slide .icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: #8b5cf6;
+            background: rgba(139, 92, 246, 0.15);
+            padding: 20px;
+            border-radius: 50%;
+            display: inline-block;
+            line-height: 1;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .slide h2 {
+            font-size: 2.6rem;
+            font-weight: 700;
+            margin-bottom: 14px;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #fff 30%, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .slide p {
+            font-size: 1.15rem;
+            line-height: 1.7;
+            max-width: 600px;
+            color: rgba(255, 255, 255, 0.75);
+            font-weight: 400;
+            margin: 0 auto;
+        }
+
+        /* ----- navigation arrows ----- */
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.10);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #fff;
+            font-size: 1.3rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s ease;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        .arrow:hover {
+            background: rgba(139, 92, 246, 0.35);
+            border-color: #8b5cf6;
+            transform: translateY(-50%) scale(1.05);
+        }
+
+        .arrow-left {
+            left: 18px;
+        }
+        .arrow-right {
+            right: 18px;
+        }
+
+        /* ----- dots / indicators ----- */
+        .dots {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            padding: 22px 0 28px;
+            background: rgba(0, 0, 0, 0.30);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.20);
+            border: none;
+            cursor: pointer;
+            transition: 0.3s ease;
+            padding: 0;
+        }
+
+        .dot.active {
+            background: #8b5cf6;
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
+            transform: scale(1.2);
+        }
+
+        .dot:hover {
+            background: rgba(255, 255, 255, 0.40);
+        }
+
+        /* ----- background placeholders (random colors) ----- */
+        .slide-1 {
+            background: linear-gradient(135deg, #1e1b4b, #4c1d95);
+        }
+        .slide-2 {
+            background: linear-gradient(135deg, #0f172a, #1e3a5f);
+        }
+        .slide-3 {
+            background: linear-gradient(135deg, #1c1917, #44403c);
+        }
+        .slide-4 {
+            background: linear-gradient(135deg, #0b1120, #1f2937);
+        }
+        .slide-5 {
+            background: linear-gradient(135deg, #1e293b, #334155);
+        }
+
+        /* ----- responsive adjustments ----- */
+        @media (max-width: 768px) {
+            .slide {
+                min-height: 400px;
+                padding: 30px 20px;
+            }
+            .slide h2 {
+                font-size: 2rem;
+            }
+            .slide p {
+                font-size: 1rem;
+                max-width: 100%;
+            }
+            .slide .icon {
+                font-size: 3rem;
+                padding: 16px;
+            }
+            .arrow {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+            .arrow-left {
+                left: 10px;
+            }
+            .arrow-right {
+                right: 10px;
+            }
+            .dots {
+                padding: 16px 0 20px;
+                gap: 10px;
+            }
+            .dot {
+                width: 10px;
+                height: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .slide {
+                min-height: 350px;
+                padding: 24px 16px;
+            }
+            .slide h2 {
+                font-size: 1.6rem;
+            }
+            .slide p {
+                font-size: 0.95rem;
+            }
+            .arrow {
+                width: 34px;
+                height: 34px;
+                font-size: 0.8rem;
+            }
+            .dots {
+                gap: 8px;
+                padding: 12px 0 16px;
+            }
+            .dot {
+                width: 8px;
+                height: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="carousel-wrapper">
+        <div class="carousel">
+
+            <!-- Slides container -->
+            <div class="slides" id="slides">
+                <!-- Slide 1 -->
+                <div class="slide slide-1">
+                    <div class="icon"><i class="fas fa-rocket"></i></div>
+                    <h2>Launch your vision</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum auctor, nisl eget ultricies.</p>
+                </div>
+                <!-- Slide 2 -->
+                <div class="slide slide-2">
+                    <div class="icon"><i class="fas fa-palette"></i></div>
+                    <h2>Design that inspires</h2>
+                    <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+                </div>
+                <!-- Slide 3 -->
+                <div class="slide slide-3">
+                    <div class="icon"><i class="fas fa-bolt"></i></div>
+                    <h2>Lightning fast</h2>
+                    <p>Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                </div>
+                <!-- Slide 4 -->
+                <div class="slide slide-4">
+                    <div class="icon"><i class="fas fa-shield-alt"></i></div>
+                    <h2>Secure by default</h2>
+                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla.</p>
+                </div>
+                <!-- Slide 5 -->
+                <div class="slide slide-5">
+                    <div class="icon"><i class="fas fa-infinity"></i></div>
+                    <h2>Scale without limits</h2>
+                    <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit.</p>
+                </div>
+            </div>
+
+            <!-- Arrows -->
+            <button class="arrow arrow-left" id="prevBtn" aria-label="Previous slide">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="arrow arrow-right" id="nextBtn" aria-label="Next slide">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+
+        <!-- Dots / indicators -->
+        <div class="dots" id="dotsContainer"></div>
+    </div>
+
+    <script>
+        (function() {
+            const slidesContainer = document.getElementById('slides');
+            const slides = slidesContainer.querySelectorAll('.slide');
+            const totalSlides = slides.length;
+            let currentIndex = 0;
+            let isTransitioning = false;
+            let autoPlayInterval = null;
+
+            // Create dots
+            const dotsContainer = document.getElementById('dotsContainer');
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement('button');
+                dot.classList.add('dot');
+                dot.setAttribute('data-index', i);
+                dot.setAttribute('aria-label', `Go to slide ${i+1}`);
+                if (i === 0) dot.classList.add('active');
+                dotsContainer.appendChild(dot);
+            }
+            const dots = dotsContainer.querySelectorAll('.dot');
+
+            // Update slide position
+            function goToSlide(index) {
+                if (isTransitioning || index === currentIndex) return;
+                if (index < 0) index = totalSlides - 1;
+                if (index >= totalSlides) index = 0;
+
+                isTransitioning = true;
+                currentIndex = index;
+
+                // Move slides
+                slidesContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+                // Update dots
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === currentIndex);
+                });
+
+                setTimeout(() => {
+                    isTransitioning = false;
+                }, 600); // matches CSS transition
+            }
+
+            function nextSlide() {
+                goToSlide(currentIndex + 1);
+            }
+
+            function prevSlide() {
+                goToSlide(currentIndex - 1);
+            }
+
+            // Event listeners for arrows
+            document.getElementById('nextBtn').addEventListener('click', function(e) {
+                e.stopPropagation();
+                nextSlide();
+                resetAutoPlay();
+            });
+
+            document.getElementById('prevBtn').addEventListener('click', function(e) {
+                e.stopPropagation();
+                prevSlide();
+                resetAutoPlay();
+            });
+
+            // Event listeners for dots
+            dots.forEach((dot) => {
+                dot.addEventListener('click', function() {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    goToSlide(index);
+                    resetAutoPlay();
+                });
+            });
+
+            // Keyboard navigation
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'ArrowLeft') {
+                    e.preventDefault();
+                    prevSlide();
+                    resetAutoPlay();
+                } else if (e.key === 'ArrowRight') {
+                    e.preventDefault();
+                    nextSlide();
+                    resetAutoPlay();
+                }
+            });
+
+            // Touch / swipe support for mobile
+            let touchStartX = 0;
+            let touchEndX = 0;
+
+            const carousel = document.querySelector('.carousel');
+            carousel.addEventListener('touchstart', function(e) {
+                touchStartX = e.changedTouches[0].screenX;
+            }, { passive: true });
+
+            carousel.addEventListener('touchend', function(e) {
+                touchEndX = e.changedTouches[0].screenX;
+                const diff = touchStartX - touchEndX;
+                if (Math.abs(diff) > 40) { // minimum swipe distance
+                    if (diff > 0) {
+                        nextSlide();
+                    } else {
+                        prevSlide();
+                    }
+                    resetAutoPlay();
+                }
+            }, { passive: true });
+
+            // Auto-play
+            function startAutoPlay() {
+                if (autoPlayInterval) clearInterval(autoPlayInterval);
+                autoPlayInterval = setInterval(nextSlide, 5000);
+            }
+
+            function resetAutoPlay() {
+                if (autoPlayInterval) {
+                    clearInterval(autoPlayInterval);
+                    startAutoPlay();
+                }
+            }
+
+            // Pause on hover (desktop)
+            const wrapper = document.querySelector('.carousel-wrapper');
+            wrapper.addEventListener('mouseenter', function() {
+                if (autoPlayInterval) {
+                    clearInterval(autoPlayInterval);
+                    autoPlayInterval = null;
+                }
+            });
+            wrapper.addEventListener('mouseleave', function() {
+                if (!autoPlayInterval) {
+                    startAutoPlay();
+                }
+            });
+
+            // Initialize
+            startAutoPlay();
+
+            // Ensure first slide is shown (no transform initially)
+            slidesContainer.style.transform = 'translateX(0)';
+
+            // If there are any issues with initial active dot, set it
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === 0);
+            });
+
+            // Handle window resize to maintain slide position (no-op, but keep)
+            // Also ensure slides fill height
+        })();
+    </script>
+
+</body>
+</html>
